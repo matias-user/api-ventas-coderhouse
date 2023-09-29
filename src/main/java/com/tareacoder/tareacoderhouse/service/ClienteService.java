@@ -29,5 +29,8 @@ public class ClienteService {
 
         return clientes;
     }
+    public void eliminarPorId(String id){
 
+        clienteRepository.deleteById(Integer.parseInt(id));
+    }
 }
