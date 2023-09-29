@@ -1,6 +1,8 @@
 package com.tareacoder.tareacoderhouse.domain.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -9,11 +11,22 @@ import jakarta.persistence.Table;
 public class Cliente {
     
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
     private String apellido;
     private String dni;
     private Integer anio;
+
+    public Cliente() {
+    }
+    public Cliente(Integer id, String nombre, String apellido, String dni, Integer anio) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.anio = anio;
+    }
     public Integer getId() {
         return id;
     }
