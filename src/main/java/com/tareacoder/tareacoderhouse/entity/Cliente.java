@@ -1,20 +1,26 @@
-package com.tareacoder.tareacoderhouse.domain.entity;
+package com.tareacoder.tareacoderhouse.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "CLIENTE")
+@Table(name = "clientes")
 public class Cliente {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotEmpty
+    @NotBlank
     private String nombre;
     private String apellido;
+    @NotEmpty
+    @NotBlank
     private String dni;
     private Integer anio;
 

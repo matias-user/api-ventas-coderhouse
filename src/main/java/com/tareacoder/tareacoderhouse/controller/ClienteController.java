@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tareacoder.tareacoderhouse.domain.entity.Cliente;
+import com.tareacoder.tareacoderhouse.entity.Cliente;
 import com.tareacoder.tareacoderhouse.service.ClienteService;
 
 
@@ -38,6 +38,4 @@ public class ClienteController {
 
         clienteService.eliminarPorId(id);
     }
-
-
 }
