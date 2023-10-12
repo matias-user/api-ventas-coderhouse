@@ -2,15 +2,11 @@ package com.tareacoder.tareacoderhouse.entity;
 
 import java.util.Date;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -39,52 +35,53 @@ public class Producto {
     @Temporal(TemporalType.DATE)
     @Column(name = "creado_en")
     private Date creadoEn;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    @JoinColumn( name = "item_id" )
-    private ItemComprobante itemComprobante;
     
     @PrePersist
     public void prePersist(){
         creadoEn = new Date();
 
     }
+
     public Integer getProductoId() {
         return productoId;
     }
+
     public void setProductoId(Integer productoId) {
         this.productoId = productoId;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public Integer getStock() {
         return stock;
     }
+
     public void setStock(Integer stock) {
         this.stock = stock;
     }
+
     public Double getPrecio() {
         return precio;
     }
+
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
+
     public Date getCreadoEn() {
         return creadoEn;
     }
+
     public void setCreadoEn(Date creadoEn) {
         this.creadoEn = creadoEn;
     }
-    public ItemComprobante getItemComprobante() {
-        return itemComprobante;
-    }
-    public void setItemComprobante(ItemComprobante itemComprobante) {
-        this.itemComprobante = itemComprobante;
-    }
-
+    
 
     
 }

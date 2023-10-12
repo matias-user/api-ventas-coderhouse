@@ -18,7 +18,6 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "comprobantes")
@@ -27,17 +26,19 @@ public class Comprobante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comprobante_id")
     private Integer comprobanteId;
-    
     @Column(name = "creado_en")
     @Temporal(TemporalType.DATE)
     private Date creadoEn;
-    @NotNull
-    @OneToMany(mappedBy = "comprobante",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private String descripcion;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "comprobante_id")
     private List<ItemComprobante> itemComprobantes;
-    @NotNull
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    @JoinColumn(name = "cliente_id")
+
+    @ManyToOne( fetch = FetchType.LAZY )
     private Cliente cliente;
+    
+
     public Comprobante() {
         itemComprobantes = new ArrayList<ItemComprobante>();
     }
@@ -46,6 +47,13 @@ public class Comprobante {
         creadoEn = new Date();
 
     }
+    public Double getTotal(){
+        Double total = 0.0;
+        for (int i = 0; i < itemComprobantes.size(); i++) {
+            total += itemComprobantes.get(i).getProducto().getPrecio() * itemComprobantes.get(i).getCantidad(); 
+        }
+        return total;
+    } 
     
     public void addProducto(ItemComprobante itemComprobante){
         itemComprobantes.add(itemComprobante);
@@ -75,6 +83,12 @@ public class Comprobante {
     }
     public void setItemComprobantes(List<ItemComprobante> itemComprobantes) {
         this.itemComprobantes = itemComprobantes;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
 }

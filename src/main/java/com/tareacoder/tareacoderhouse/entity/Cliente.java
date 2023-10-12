@@ -1,5 +1,6 @@
 package com.tareacoder.tareacoderhouse.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -32,8 +33,9 @@ public class Cliente {
     private Integer anio;
     @OneToMany(  mappedBy = "cliente",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
     private List<Comprobante> comprobantes;
-
+    
     public Cliente() {
+        comprobantes = new ArrayList<Comprobante>();
     }
     public Cliente(Integer id, String nombre, String apellido, String dni, Integer anio) {
         this.id = id;
@@ -80,6 +82,12 @@ public class Cliente {
     }
     public void setAnio(Integer anio) {
         this.anio = anio;
+    }
+    public List<Comprobante> getComprobantes() {
+        return comprobantes;
+    }
+    public void setComprobantes(List<Comprobante> comprobantes) {
+        this.comprobantes = comprobantes;
     }
 
     
