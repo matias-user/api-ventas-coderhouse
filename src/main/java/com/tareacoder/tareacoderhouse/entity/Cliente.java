@@ -1,9 +1,15 @@
 package com.tareacoder.tareacoderhouse.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -13,7 +19,8 @@ import jakarta.validation.constraints.NotEmpty;
 public class Cliente {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cliente_id")
     private Integer id;
     @NotEmpty
     @NotBlank
@@ -23,6 +30,8 @@ public class Cliente {
     @NotBlank
     private String dni;
     private Integer anio;
+    @OneToMany(  mappedBy = "cliente",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
+    private List<Factura> facturas;
 
     public Cliente() {
     }
@@ -32,6 +41,9 @@ public class Cliente {
         this.apellido = apellido;
         this.dni = dni;
         this.anio = anio;
+    }
+    public void addFactura(Factura factura){
+        facturas.add(factura);
     }
     public Integer getId() {
         return id;
@@ -69,5 +81,6 @@ public class Cliente {
     public void setAnio(Integer anio) {
         this.anio = anio;
     }
+
     
 }
