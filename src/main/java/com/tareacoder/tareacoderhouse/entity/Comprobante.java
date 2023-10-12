@@ -21,60 +21,60 @@ import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "facturas")
-public class Factura {
+@Table(name = "comprobantes")
+public class Comprobante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "factura_id")
-    private Integer facturaId;
-
+    @Column(name = "comprobante_id")
+    private Integer comprobanteId;
+    
     @Column(name = "creado_en")
     @Temporal(TemporalType.DATE)
     private Date creadoEn;
     @NotNull
-    @OneToMany(mappedBy = "factura",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<Producto> productos;
+    @OneToMany(mappedBy = "comprobante",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<ItemComprobante> itemComprobantes;
     @NotNull
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-    public Factura() {
-        productos = new ArrayList<Producto>();
+    public Comprobante() {
+        itemComprobantes = new ArrayList<ItemComprobante>();
     }
      @PrePersist
     public void prePersist(){
         creadoEn = new Date();
 
     }
+    
+    public void addProducto(ItemComprobante itemComprobante){
+        itemComprobantes.add(itemComprobante);
+    }
 
-    public void addProducto(Producto producto){
-        productos.add(producto);
-    }
-    public Integer getFacturaId() {
-        return facturaId;
-    }
-    public void setFacturaId(Integer facturaId) {
-        this.facturaId = facturaId;
-    }
     public Date getCreadoEn() {
         return creadoEn;
     }
     public void setCreadoEn(Date creadoEn) {
         this.creadoEn = creadoEn;
     }
-    public List<Producto> getProductos() {
-        return productos;
-    }
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
+
     public Cliente getCliente() {
         return cliente;
     }
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-        
+    public Integer getComprobanteId() {
+        return comprobanteId;
+    }
+    public void setComprobanteId(Integer comprobanteId) {
+        this.comprobanteId = comprobanteId;
+    }
+    public List<ItemComprobante> getItemComprobantes() {
+        return itemComprobantes;
+    }
+    public void setItemComprobantes(List<ItemComprobante> itemComprobantes) {
+        this.itemComprobantes = itemComprobantes;
+    }
     
 }

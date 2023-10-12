@@ -40,9 +40,9 @@ public class Producto {
     @Column(name = "creado_en")
     private Date creadoEn;
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
-    @JoinColumn( name = "factura_id" )
-    private Factura factura;
-
+    @JoinColumn( name = "item_id" )
+    private ItemComprobante itemComprobante;
+    
     @PrePersist
     public void prePersist(){
         creadoEn = new Date();
@@ -72,12 +72,19 @@ public class Producto {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
-    public Factura getFactura() {
-        return factura;
+    public Date getCreadoEn() {
+        return creadoEn;
     }
-    public void setFactura(Factura factura) {
-        this.factura = factura;
+    public void setCreadoEn(Date creadoEn) {
+        this.creadoEn = creadoEn;
     }
+    public ItemComprobante getItemComprobante() {
+        return itemComprobante;
+    }
+    public void setItemComprobante(ItemComprobante itemComprobante) {
+        this.itemComprobante = itemComprobante;
+    }
+
 
     
 }

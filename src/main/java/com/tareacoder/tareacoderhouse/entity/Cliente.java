@@ -31,7 +31,7 @@ public class Cliente {
     private String dni;
     private Integer anio;
     @OneToMany(  mappedBy = "cliente",cascade = CascadeType.ALL ,fetch = FetchType.LAZY)
-    private List<Factura> facturas;
+    private List<Comprobante> comprobantes;
 
     public Cliente() {
     }
@@ -42,8 +42,8 @@ public class Cliente {
         this.dni = dni;
         this.anio = anio;
     }
-    public void addFactura(Factura factura){
-        facturas.add(factura);
+    public void addComprobante(Comprobante comprobante){
+        comprobantes.add(comprobante);
     }
     public Integer getId() {
         return id;
